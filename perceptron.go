@@ -50,3 +50,17 @@ func (p *Perceptron) Activates(input []int) int {
 		return 0
 	}
 }
+
+func (p *Perceptron) Train(input []int, expectedOutput int) {
+	if len(p.Weights) != len(input) {
+		panic(fmt.Sprintf("Input length should be %d", len(p.Weights)))
+	}
+
+	calculatedOutput := p.Activates(input)
+
+	p.Threshold = p.Threshold - (float64(expectedOutput) - float64(calculatedOutput))
+
+	for i := 0; i < len(p.Weights); i++ {
+		p.Weights[i] = p.Weights[i] + (float64(expectedOutput) - float64(calculatedOutput)) * float64(input[i])
+	}
+}
