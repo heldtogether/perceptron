@@ -43,4 +43,20 @@ var _ = Describe("Perceptron", func() {
 		Expect(a).Should(BeNumerically("==", 0.6046602879796196))
 	})
 
+	It("activates when activity is greater than the threshold", func() {
+		p := perceptron.New(2)
+		p.Threshold = 0
+
+		// Calculated activity = 0.6046602879796196 > 0 so activates
+		Expect(p.Activates([]int{1, 0})).Should(BeNumerically("==", 1))
+	})
+
+	It("doesn't activates when activity is greater than the threshold", func() {
+		p := perceptron.New(2)
+		p.Threshold = 1
+
+		// Calculated activity = 0.6046602879796196 < 1 so doesn't activate
+		Expect(p.Activates([]int{1, 0})).Should(BeNumerically("==", 0))
+	})
+
 })

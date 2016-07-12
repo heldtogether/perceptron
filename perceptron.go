@@ -38,3 +38,15 @@ func (p *Perceptron) Forward(input []int) float64 {
 
 	return sum
 }
+
+func (p *Perceptron) Activates(input []int) int {
+	if len(p.Weights) != len(input) {
+		panic(fmt.Sprintf("Input length should be %d", len(p.Weights)))
+	}
+
+	if p.Forward(input) >= p.Threshold {
+		return 1
+	} else {
+		return 0
+	}
+}
