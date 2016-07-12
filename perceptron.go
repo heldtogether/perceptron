@@ -1,6 +1,7 @@
 package perceptron
 
 import (
+	"fmt"
 	"math/rand"
 )
 
@@ -22,4 +23,18 @@ func initializeWeights(numInputs int) []float64 {
 		w[i] = rand.Float64()
 	}
 	return w
+}
+
+func (p *Perceptron) Forward(input []int) float64 {
+	if len(p.Weights) != len(input) {
+		panic(fmt.Sprintf("Input length should be %d", len(p.Weights)))
+	}
+
+	var sum float64
+
+	for i := 0; i < len(p.Weights); i++ {
+		sum += p.Weights[i] * float64(input[i])
+	}
+
+	return sum
 }
