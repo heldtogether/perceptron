@@ -5,12 +5,14 @@ import (
 )
 
 type Perceptron struct {
-	Weights []float64
+	Weights   []float64
+	Threshold float64
 }
 
 func New(numInputs int) *Perceptron {
 	p := new(Perceptron)
 	p.Weights = initializeWeights(numInputs)
+	p.Threshold = rand.Float64()
 	return p
 }
 
