@@ -38,10 +38,10 @@ func initializeWeights(numInputs int) []float64 {
 	return w
 }
 
-// Forward calculates the activity on the Perceptron for a given
+// Activity calculates the activity on the Perceptron for a given
 // input. It doesn't calculate if the Perceptron actually fires,
 // see "Activates" instead.
-func (p *Perceptron) Forward(input []int) float64 {
+func (p *Perceptron) Activity(input []int) float64 {
 	if len(p.Weights) != len(input) {
 		panic(fmt.Sprintf("Input length should be %d", len(p.Weights)))
 	}
@@ -63,7 +63,7 @@ func (p *Perceptron) Activates(input []int) int {
 		panic(fmt.Sprintf("Input length should be %d", len(p.Weights)))
 	}
 
-	if p.Forward(input) >= p.Threshold {
+	if p.Activity(input) >= p.Threshold {
 		return 1
 	} else {
 		return 0
